@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Colores</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #colorDisplay {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Selector de Colores</h1>
+
+    <h3>Participantes</h3>
+    <ul id="participantesList">
+        <li>Romer</li>
+        <li>Oscar</li>
+        <li>Angy</li>
+        <li>Bleys</li>
+    </ul>
+
+    <h3>Colores disponibles</h3>
+    <p id="coloresDisponibles">Rojo, Azul, Amarillo, Verde, Morado, Rosa, Blanco, Negro, Café</p><br>
+
+    <button onclick="elegirColor('Romer')" id="botonRomer">Elegir Color (Romer)</button>
+    <button onclick="elegirColor('Oscar')" id="botonOscar">Elegir Color (Oscar)</button>
+    <button onclick="elegirColor('Angy')" id="botonAngy">Elegir Color (Angy)</button>
+    <button onclick="elegirColor('Bleys')" id="botonBleys">Elegir Color (Bleys)</button>
+
+    <div id="colorDisplay"></div>
+    <button onclick="mostrarColoresSeleccionados()">Mostrar Colores Seleccionados</button><br><br>
+    <img src="C:\Users\ASUS\Desktop\TURNERO COLORES\jesus.png" alt="" style="width: 20%;">
+
+    <script>
+        // Lista de participantes
+        var participantes = ['Romer', 'Oscar', 'Angy', 'Bleys'];
+
+        // Lista de colores disponibles
+        var coloresDisponibles = ['Rojo', 'Azul', 'Amarillo', 'Verde', 'Morado', 'Rosa', 'Blanco', 'Negro', 'Café'];
+
+        // Objeto para almacenar los colores seleccionados por cada participante
+        var coloresSeleccionados = {};
+
+        function elegirColor(participante) {
+            // Obtener el botón correspondiente al participante
+            var botonParticipante = document.getElementById('boton' + participante);
+
+            // Verificar si el botón está habilitado
+            if (!botonParticipante.disabled) {
+                // Seleccionar un color al azar
+                var colorAleatorio = coloresDisponibles[Math.floor(Math.random() * coloresDisponibles.length)];
+
+                // Almacenar el color seleccionado por el participante
+                coloresSeleccionados[participante] = colorAleatorio;
+
+                // Eliminar el color seleccionado de la lista de colores disponibles
+                coloresDisponibles.splice(coloresDisponibles.indexOf(colorAleatorio), 1);
+
+                // Mostrar el resultado en el elemento con id "colorDisplay"
+                document.getElementById('colorDisplay').innerHTML = participante + ' eligió el color ' + colorAleatorio;
+
+                // Actualizar la lista de colores disponibles en el documento
+                document.getElementById('coloresDisponibles').innerHTML = coloresDisponibles.join(', ');
+
+                // Deshabilitar el botón para este participante
+                botonParticipante.disabled = true;
+            }
+        }
+
+        function mostrarColoresSeleccionados() {
+            var resultado = 'Colores seleccionados por cada persona:\n';
+
+            for (var participante in coloresSeleccionados) {
+                resultado += participante + ': ' + coloresSeleccionados[participante] + '\n';
+            }
+
+            // Agregar el mensaje "AÑAY ÑAY" al final del resultado
+            resultado += '\nAÑAY ÑAY';
+
+            alert(resultado);
+        }
+    </script>
+
+</body>
+
+</html>
